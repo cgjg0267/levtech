@@ -6,13 +6,18 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+    <x-app-layout>
+        <x-slot name="header">
+            Index
+        </x-slot>
     <body>
-        <h1>Blog Name</h1>
+        <h1><strong>Blog Name</strong></h1>
         <a href="/posts/create">create</a>
         <div class='posts'>
             @foreach ($posts as $post)
             <div class='post'>
-                <a href="/posts/{{ $post->id}}"><h2 class='title'>{{ $post->title }}</h2></a>
+                <a href="/posts/{{ $post->id}}"><small>{{ $post->user->name }}</small><h2 class='title'>{{ $post->title }}</h2></a>
+                <h2 class='artist'>{{ $post->artist }}</h2>
                 <p class='body'>{{ $post->body }}</p>
                 <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
                     @csrf
@@ -33,4 +38,6 @@
             }
         </script>
     </body>
+    <p>ログインユーザー：{{ Auth::user()->name }}</p>
+    </x-app-layout>
 </html>
