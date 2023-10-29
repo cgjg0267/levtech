@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use App\Models\Comment;
+
 
 class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return view('posts/index')->with(['posts' => $post->getPagenateByLimit(5)]);  
-       //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
+        return view('posts/index')->with(['posts' => $post->getPagenateByLimit(5)]); 
     }
     
     public function show(Post $post)
@@ -18,14 +19,15 @@ class PostController extends Controller
         return view('posts/show')->with(['post' => $post]);
     }
     
-    public function create()
+    public function create(Comment $comment, Post $post)
     {
-        return view('posts/create');
+        return view('posts.create')->with(['comments' => $comment->get()]);
     }
     
     public function store(Post $post, PostRequest $request)
     {
         $input = $request['post'];
+        $input += ['user_id' => $request->user()->id];
         $post ->fill($input)->save();
         return redirect('/posts/'. $post->id);
     }
@@ -38,7 +40,14 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
+        $input_post += ['user_id' => $request->user()->id];
         $post ->fill($input_post)->save();
         return redirect('/posts/'. $post->id);
+    }
+    
+    public function delete(Post $post)
+    {
+        $post->delete();
+        return redirect('/');
     }
 }
