@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
@@ -31,9 +32,25 @@ class CommentController extends Controller
        return redirect('/');
    }
 
-    public function destroy(Request $request)
+
+
+    public function edit(Post $post, Comment $comment)
     {
-        $comment = Comment::find($request->comment_id);
+        return view('comments/edit')->with(['comment' => $comment, 'post' => $post]);
+    }
+    
+    
+    public function update(CommentRequest $request, Post $post, Comment $comment)
+    {
+        $input_comment = $request['comment'];
+        $input_comment += ['user_id' => $request->user()->id];
+        $comment ->fill($input_comment)->save();
+        return redirect('/');
+    }
+    
+    
+    public function delete(Comment $comment)
+    {
         $comment->delete();
         return redirect('/');
     }

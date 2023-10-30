@@ -14,9 +14,10 @@ class PostController extends Controller
         return view('posts/index')->with(['posts' => $post->getPagenateByLimit(5)]); 
     }
     
-    public function show(Post $post)
+    public function show(Comment $comment, Post $post)
     {
         return view('posts/show')->with(['post' => $post]);
+        return view('posts/show')->with(['comments' => $comment ->get()]);
     }
     
     public function create(Comment $comment, Post $post)
