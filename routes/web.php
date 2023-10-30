@@ -23,7 +23,7 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
 
 
 Route::controller(CommentController::class)->middleware(['auth'])->group(function(){
-    Route::post('/comment/{post}', 'store')->name('store');
+    Route::post('/comments/{post}', 'store')->name('store');
     Route::get('/comments/create/{post}', 'create')->name('create');
     Route::put('/comments/{comment}', 'update')->name('update');
     Route::delete('/comments/{comment}', 'delete')->name('delete');

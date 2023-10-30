@@ -9,17 +9,18 @@
     <x-app-layout>
     <body class="antialiased">
         <h1>Blog Name</h1>
-        <form action="/comments/{{$post->id}}", method="POST">
+        <form action="/comments/{{ $comment->id }}", method="POST">
             @csrf
+            @method('PUT')
             <div class="comment">
-                <h2>Comments</h2>
-                <textarea name="comments[comment]" placeholder="コメント" >{{ old('comment.comment')}}</textarea>
-                <p class="comment_error" style="color:red">{{$errors->first('comment.comment') }}</p>
+                <h2>コメント</h2>
+                <textarea name="comment[comment]" placeholder="コメント">{{ $comment->comment }}</textarea>
+                <p class="body_error" style="color:red">{{$errors->first('comment.comment') }}</p>
             </div>
-            <input type="submit" value="store">
+            <input type="submit" value="update">
         </form>
         <div class='footer'>
-            <a href="/">戻る</a>
+            <button type="button" onClick="back()">戻る</button>
         </div>
     </body>
     </x-app-layout>
