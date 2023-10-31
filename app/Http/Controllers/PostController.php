@@ -11,6 +11,10 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
+        $query = Post::query();
+            if ($search = request('search')) {
+                $query->where('title', 'LIKE', "%{$search}%")->orWhere('artist','LIKE',"%{$search}%")->orWhere('body','LIKE',"%{$search}%");
+            }
         return view('posts/index')->with(['posts' => $post->getPagenateByLimit(5)]); 
     }
     

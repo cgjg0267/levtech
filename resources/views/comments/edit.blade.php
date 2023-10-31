@@ -20,7 +20,7 @@
             <input type="submit" value="update">
         </form>
         <div class='footer'>
-            <button type="button" onClick="back()">戻る</button>
+            <a href="/">戻る</a>
         </div>
     </body>
     </x-app-layout>
