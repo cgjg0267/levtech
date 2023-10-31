@@ -22,11 +22,11 @@
                 <p class="artist_error" style="color:red">{{$errors->first('post.artist') }}</p>
             </div>
             <div class="body">
-                <h2>Body</h2>
+                <h2>感想</h2>
                 <textarea name="post[body]" placeholder="感想" >{{ old('post.body')}}</textarea>
                 <p class="body_error" style="color:red">{{$errors->first('post.body') }}</p>
             </div>
-            <input type="submit" value="store">
+            <input type="submit" value="保存">
         </form>
         <div class='footer'>
             <a href="/">戻る</a>

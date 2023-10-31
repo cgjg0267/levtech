@@ -8,37 +8,41 @@
     </head>
         <x-app-layout>
     <body class="antialiased">
-        <small>ユーザー：{{ $post->user->name }}</small>
+        <table>
+        <p>ユーザー：{{ $post->user->name }}</p>
         <h1 class="title">
-            タイトル：{{ $post->title }}
+            Title：{{ $post->title }}
         </h1>
-        <h2 class='artist'>アーティスト：{{ $post->artist }}</h2>
+        <h2 class='artist'>Artist：{{ $post->artist }}</h2>
         <div class='content'>
             <div class='content_post'>
-                感想：<p class='body'>{{ $post->body }}</p>
+            <p class='body'>感想：{{ $post->body }}</p>
             </div>
         </div>
         <div class='edit'>
-            <a href="/posts/{{ $post->id }}/edit">編集</a>
+            <a href="/posts/{{ $post->id }}/edit">[編集]</a>
         </div>
         <div class='comment'>
             @foreach ($post->comments as $comment)
-            <small>{{ $comment->user->name }}</small>
-                <div class='comment'>
+            <tr>
+            <td><small>{{ $comment->user->name }}</small></td>
+                <td><div class='comment'>
                     <p class='body'>{{ $comment->comment }}</p>
-                </div>
-        <div class='edit'>
-            <a href="/comments/{{$comment->id}}/edit">コメント編集</a>
-        </div>
+                </div></td>
+        <td><div class='edit'>
+            <a href="/comments/{{$comment->id}}/edit">[コメント編集]</a>
+        </div></td>
         
-                <form action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
+                <td><form action="/comments/{{ $comment->id }}" id="form_{{ $comment->id }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="button" onclick="deleteComment({{ $comment->id }})">コメント削除</button> 
-                </form>
+                    <button type="button" onclick="deleteComment({{ $comment->id }})">[コメント削除]</button> 
+                </form></td>
+                </tr>
             @endforeach
-            <a href="/comments/create/{{$post->id}}">コメントする</a>
+            <a href="/comments/create/{{$post->id}}">>コメントする</a>
         </div>
+        </table>
         <div class='footer'>
             <a href="/">戻る</a>
         </div>
@@ -51,6 +55,7 @@
                 }
             }
         </script>
+        
     </body>
         </x-app-layout>
 </html>

@@ -16,7 +16,7 @@
                 <textarea name="comments[comment]" placeholder="コメント" >{{ old('comment.comment')}}</textarea>
                 <p class="comment_error" style="color:red">{{$errors->first('comment.comment') }}</p>
             </div>
-            <input type="submit" value="store">
+            <input type="submit" value="保存">
         </form>
         <div class='footer'>
             <a href="/">戻る</a>
