@@ -17,10 +17,10 @@
                 <textarea name="comment[comment]" placeholder="コメント">{{ $comment->comment }}</textarea>
                 <p class="body_error" style="color:red">{{$errors->first('comment.comment') }}</p>
             </div>
-            <input type="submit" value="update">
+            <input type="submit" value="更新">
         </form>
         <div class='footer'>
-            <a href="/">戻る</a>
+            <a href="/posts/{{$post->id}}">戻る</a>
         </div>
     </body>
     </x-app-layout>

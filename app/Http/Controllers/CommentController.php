@@ -34,8 +34,9 @@ class CommentController extends Controller
 
 
 
-    public function edit(Post $post, Comment $comment)
+    public function edit(Comment $comment)
     {
+        $post = $comment->post()->first();
         return view('comments/edit')->with(['comment' => $comment, 'post' => $post]);
     }
     

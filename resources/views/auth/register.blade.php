@@ -1,3 +1,10 @@
+        <x-primary-button class="ml-3">
+        <a href="/register">register</a>
+        </x-primary-button>
+        <x-primary-button class="ml-3">
+        <a href="/login">log in</a>
+        </x-primary-button>
+        
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
